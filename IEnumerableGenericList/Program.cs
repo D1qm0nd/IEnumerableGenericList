@@ -1,6 +1,4 @@
 ﻿using ListLib;
-using System.Collections;
-using System.Runtime.CompilerServices;
 
 namespace ProgramNameSpace
 {
@@ -18,6 +16,10 @@ namespace ProgramNameSpace
             public void Show()
             {
                 Console.WriteLine(Name);
+            }
+            ~Person()
+            {
+                Console.WriteLine($"{Name} убежал");
             }
         }
 
