@@ -27,20 +27,16 @@ namespace ListLib
 
         public GenListItem<T> Add(T item)
         {
-            unsafe
-            {
-                GenListItem<T> sup = this;
-
-                if (sup != null)
-                { 
-                    while (sup.next != null)
-                    {
-                        sup = sup.next;
-                    }
-                    sup.next = (new GenListItem<T>(sup, item));
+            GenListItem<T> sup = this;
+            if (sup != null)
+            { 
+                while (sup.next != null)
+                {
+                    sup = sup.next;
                 }
-                return sup.next;
+                sup.next = (new GenListItem<T>(sup, item));
             }
+            return sup.next;
         }
         public IEnumerator<T> GetEnumerator()
         {

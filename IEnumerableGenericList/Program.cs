@@ -1,4 +1,6 @@
 ﻿using ListLib;
+using System.Collections;
+using System.Runtime.CompilerServices;
 
 namespace ProgramNameSpace
 {
@@ -10,16 +12,12 @@ namespace ProgramNameSpace
             public string Name { get; set; }
             public Person(string name)
             {
-                Name = name;
+                Name = name; 
             }
 
             public void Show()
             {
                 Console.WriteLine(Name);
-            }
-            ~Person()
-            {
-                Console.WriteLine($"{Name} убежал");
             }
         }
 
@@ -27,7 +25,7 @@ namespace ProgramNameSpace
         {
             GenList<Person> genListPerson = new GenList<Person>();
             for (int i = 0; i < 10; i++)
-            {
+            { 
                 genListPerson.Add(new Person($"Person {i}"));
             }
             foreach (var i in genListPerson)
