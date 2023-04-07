@@ -1,18 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Reflection.Metadata;
 
 namespace ListLib
 {
     public class GenList<T> : IEnumerable<T>, IEnumerator<T>
     {
-#nullable disable
+        #nullable disable
         private GenListItem<T> items;
         private GenListItem<T> end;
         private int position = 0;
         public int Count = 0;
 
-        public T Current
+        public T Current 
         {
-            get
+            get 
             {
                 return Item(position);
             }
@@ -31,37 +33,38 @@ namespace ListLib
                 this.items = new GenListItem<T>(item);
             }
             else
-                end = this.items.Add(item);
+            end = this.items.Add(item);
             this.Count++;
         }
+
         private GenListItem<T> GetNode(int index)
         {
             unsafe
             {
                 GenListItem<T> node = end;
                 if (index > 0 && index < Count)
+            {
+                if (index >= Count / 2)
                 {
-                    if (index >= Count / 2)
+                    GenListItem<T> sup = this.end;
+                    for (int i = Count; i > index; i--)
                     {
-                        GenListItem<T> sup = this.end;
-                        for (int i = Count; i > index; i--)
-                        {
-                            sup = sup.previus;
-                        }
-                        node = sup;
+                        sup = sup.previus;
                     }
-                    else
-                    {
-                        GenListItem<T> sup = this.items;
-                        for (int i = 1; i < index; i++)
-                        {
-                            sup = sup.next;
-                        }
-                        node = sup;
-                    }
+                    node = sup;
                 }
-                return node;
+                else
+                {
+                    GenListItem<T> sup = this.items;
+                    for (int i = 1; i < index; i++)
+                    {
+                        sup = sup.next;
+                    }
+                    node = sup;
+                }
             }
+            return node;
+        }
         }
         public ref T Item(int index)
         {
